@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TestHubAI – QA Automation Architecture & AI-Driven Testing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="TestHubAI helps engineering teams stabilize CI/CD, scale test automation, and adopt AI-driven testing – led by QA Automation Architect Nikos Thermogiannis."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0a1020;
+      --bg-softer: #10172f;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --danger: #f97373;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --radius-xl: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #38bdf8, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 17px;
+      color: white;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.6);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+
+    .logo-text span:last-child {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .top-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      background: var(--accent);
+      color: #020617;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.5);
+      background: #0ea5e9;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.5fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-left h1 span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 14px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .hero-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-right {
+      background: radial-gradient(circle at top left, #1d4ed8 0, #020617 50%);
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(31, 41, 55, 0.8);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      padding: 10px 10px 9px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .metric-tag {
+      font-size: 10px;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .stack-chip {
+      font-size: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      color: var(--muted);
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section {
+      border-radius: var(--radius-xl);
+      background: rgba(10, 15, 30, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    section + section {
+      margin-top: 4px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-caption {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Services */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 10px 10px 11px;
+    }
+
+    .service-card h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .service-card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .service-tag {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      color: var(--muted);
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .price-card {
+      background: rgba(10, 16, 30, 0.96);
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 11px 11px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .price-card.recommended {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4), var(--shadow-soft);
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%);
+    }
+
+    .price-header {
+      margin-bottom: 6px;
+    }
+
+    .price-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .price-pill {
+      font-size: 10px;
+      display: inline-block;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+    }
+
+    .price-value {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .price-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .price-list {
+      list-style: none;
+      margin-bottom: 9px;
+    }
+
+    .price-list li {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .price-list li::before {
+      content: "•";
+      position: absolute;
+      left: 3px;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    .price-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .step-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 9px 9px 10px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .step-text {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Case studies & about */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 14px;
+    }
+
+    .cs-item + .cs-item {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.7);
+    }
+
+    .cs-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .cs-role {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .cs-text {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .about-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .about-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+      .service-grid,
+      .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-cta {
+        justify-content: flex-start;
+      }
+      .service-grid,
+      .pricing-grid,
+      .process-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      section {
+        padding: 16px 14px 14px;
+      }
+      .page {
+        padding-inline: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">T</div>
+        <div class="logo-text">
+          <span>TestHubAI</span>
+          <span>QA Automation Architecture Studio</span>
+        </div>
+      </div>
+      <div class="top-cta">
+        <span class="pill">Limited availability for 2025</span>
+        <a href="#contact" class="btn secondary">Contact</a>
+        <a href="mailto:info@testhubai.com" class="btn">
+          Book intro call
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-left">
+          <h1>
+            QA Automation & <span>AI-Driven Testing</span> for modern engineering teams.
+          </h1>
+          <p class="hero-subtitle">
+            TestHubAI helps you stabilise CI/CD, scale test automation, and adopt AI-assisted testing — without hiring a full-time QA architect.
+          </p>
+          <div class="hero-badges">
+            <span class="hero-badge">Fractional QA Architect</span>
+            <span class="hero-badge">TS / Playwright / Appium / k6</span>
+            <span class="hero-badge">Cloud & Event-Driven Systems</span>
+          </div>
+          <div class="hero-actions">
+            <a href="mailto:info@testhubai.com" class="btn">
+              Schedule 20-minute intro
+            </a>
+            <a href="#pricing" class="btn secondary">View retainer packages</a>
+          </div>
+          <p class="hero-note">
+            Led by <strong>Nikos Thermogiannis</strong> – Senior QA Automation Engineer (DeepSea) & former Head of QA at Reydix.
+          </p>
+        </div>
+
+        <div class="hero-right">
+          <div class="panel-title">At a glance</div>
+          <div class="metrics">
+            <div class="metric-card">
+              <div class="metric-label">Annual deployments supported</div>
+              <div class="metric-value">1K+</div>
+              <div class="metric-tag">Web, mobile & backend</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Flakiness reduction</div>
+              <div class="metric-value">&gt;80%</div>
+              <div class="metric-tag">Stable CI pipelines</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Coverage uplift</div>
+              <div class="metric-value">2-3×</div>
+              <div class="metric-tag">Right tests at right level</div>
+            </div>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">TypeScript / Node.js</span>
+            <span class="stack-chip">Playwright & WebdriverIO</span>
+            <span class="stack-chip">Appium (iOS & Android)</span>
+            <span class="stack-chip">k6 performance testing</span>
+            <span class="stack-chip">Kafka event-driven flows</span>
+            <span class="stack-chip">Docker / GitHub Actions</span>
+            <span class="stack-chip">AWS / GCP</span>
+          </div>
+          <p class="small-note">
+            Engagements are designed as monthly retainers and focused projects — no long-term lock-in, no heavy process, just senior-level guidance where it matters most.
+          </p>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services">
+        <div class="section-header">
+          <h2 class="section-title">What TestHubAI does</h2>
+          <p class="section-caption">
+            Architecture-first QA and automation services for product teams that move fast.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <div class="service-card">
+            <h3>QA Automation Architecture</h3>
+            <p>
+              Design or refactor your automation stack around the testing pyramid: unit, integration, system, end-to-end and non-functional.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Testing strategy</span>
+              <span class="service-tag">Pyramid alignment</span>
+              <span class="service-tag">Scalable repos</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <h3>Web & Mobile E2E Frameworks</h3>
+            <p>
+              TypeScript-based Playwright and Appium frameworks built with Domain-Driven Design, BDD and cross-platform support.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Playwright</span>
+              <span class="service-tag">Appium</span>
+              <span class="service-tag">Cucumber / BDD</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <h3>CI/CD & Flakiness Stabilisation</h3>
+            <p>
+              Diagnose and stabilise failing pipelines: retries, test isolation, parallelisation, test data strategy and quality gates.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">GitHub Actions</span>
+              <span class="service-tag">Quality gates</span>
+              <span class="service-tag">Fast feedback</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <h3>AI-Assisted Testing</h3>
+            <p>
+              Introduce AI into your QA workflow for test generation, gap analysis, defect clustering and smarter regression selection.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">AI-driven coverage</span>
+              <span class="service-tag">LLM-assisted tests</span>
+              <span class="service-tag">Defect insights</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <h3>Backend & Event-Driven Testing</h3>
+            <p>
+              System and contract tests for microservices, event-driven architectures, Kafka streams and complex integration flows.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Kafka</span>
+              <span class="service-tag">Contract tests</span>
+              <span class="service-tag">System tests</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <h3>Mentoring & Fractional QA Leadership</h3>
+            <p>
+              Hands-on coaching for QA and dev teams, levelling up automation skills and embedding quality practices into delivery.
+            </p>
+            <div class="service-tags">
+              <span class="service-tag">Team enablement</span>
+              <span class="service-tag">Workshops</span>
+              <span class="service-tag">QA leadership</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing">
+        <div class="section-header">
+          <h2 class="section-title">Retainer packages</h2>
+          <p class="section-caption">
+            Fixed monthly engagements with clear scope and up to a set number of hours. No surprises.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Essential -->
+          <div class="price-card">
+            <div class="price-header">
+              <div class="price-name">Essential QA Guidance</div>
+              <span class="price-pill">Good for small teams</span>
+            </div>
+            <div class="price-value">Contact for Price</div>
+            <div class="price-sub">Up to 12 hours / month (≈ 2–3h / week)</div>
+            <ul class="price-list">
+              <li>Weekly 30-minute sync on QA & automation priorities</li>
+              <li>High-level guidance on TS / Playwright / Appium</li>
+              <li>1–2 automation PR reviews per week</li>
+              <li>CI/CD pipeline review and light tuning</li>
+              <li>Slack / Teams async support (24–48h response)</li>
+              <li>Monthly QA health summary</li>
+            </ul>
+            <div class="price-footer">
+              <span>For teams with in-house QA but no architect.</span>
+            </div>
+          </div>
+
+          <!-- Architecture (recommended) -->
+          <div class="price-card recommended">
+            <div class="price-header">
+              <div class="price-name">Automation Architecture Retainer</div>
+              <span class="price-pill">Recommended</span>
+            </div>
+            <div class="price-value">Contact for Price</div>
+            <div class="price-sub">Up to 20 hours / month (≈ 3–5h / week)</div>
+            <ul class="price-list">
+              <li>Weekly deep-dive (45–60 minutes) with engineers</li>
+              <li>End-to-end oversight of TS/DDD/Playwright architecture</li>
+              <li>Flakiness and stability improvement plan</li>
+              <li>CI/CD optimisation (parallelism, retries, test data)</li>
+              <li>Test strategy & coverage design across layers</li>
+              <li>Security/SDLC alignment based on industry practices</li>
+              <li>Priority Slack / Teams channel (12–24h response)</li>
+            </ul>
+            <div class="price-footer">
+              <span>Best fit for scale-ups and fast-moving teams.</span>
+            </div>
+          </div>
+
+          <!-- Fractional QA Architect -->
+          <div class="price-card">
+            <div class="price-header">
+              <div class="price-name">Fractional QA Architect</div>
+              <span class="price-pill">Higher touch</span>
+            </div>
+            <div class="price-value">Contact for Price</div>
+            <div class="price-sub">Up to 30 hours / month (≈ 6–8h / week)</div>
+            <ul class="price-list">
+              <li>Quarterly automation & quality roadmap</li>
+              <li>Coaching & pairing with QA and dev engineers</li>
+              <li>Advanced tooling setup (k6, Kafka, contract tests)</li>
+              <li>Release quality gating and readiness reviews</li>
+              <li>Involvement in critical incidents when needed</li>
+              <li>Custom internal workshops (by agreement)</li>
+            </ul>
+            <div class="price-footer">
+              <span>For organisations needing strong QA leadership.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process + Case studies / About -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">How engagements work</h2>
+          <p class="section-caption">
+            Lightweight, collaborative and designed to plug into your existing delivery process.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="step-card">
+            <div class="step-label">Step 1</div>
+            <div class="step-title">Intro call</div>
+            <p class="step-text">
+              We discuss your product, stack and current QA/automation challenges to see if there is a good fit.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-label">Step 2</div>
+            <div class="step-title">Quick assessment</div>
+            <p class="step-text">
+              Light review of your repos, pipelines and test suites to identify the top 2–3 high-impact areas.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-label">Step 3</div>
+            <div class="step-title">Retainer setup</div>
+            <p class="step-text">
+              We agree on the right retainer tier, communication channels and initial focus for the first 4–6 weeks.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-label">Step 4</div>
+            <div class="step-title">Ongoing guidance</div>
+            <p class="step-text">
+              Continuous architectural and strategic support as your teams ship features and evolve the product.
+            </p>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top: 14px;">
+          <div>
+            <div class="section-header" style="margin-bottom: 8px; padding: 0;">
+              <h3 class="section-title" style="font-size: 14px;">Selected experience</h3>
+              <p class="section-caption">Recent work that shapes how TestHubAI operates.</p>
+            </div>
+
+            <div class="cs-item">
+              <div class="cs-title">DeepSea Technologies</div>
+              <div class="cs-role">Senior QA Automation Engineer (contract)</div>
+              <p class="cs-text">
+                Supporting AI-driven maritime optimisation products with backend system tests, CI/CD integration and automation
+                frameworks around TypeScript, Kafka, Docker and cloud-native stacks.
+              </p>
+            </div>
+
+            <div class="cs-item">
+              <div class="cs-title">Reydix</div>
+              <div class="cs-role">Head of QA / Lead Software Engineer in Test</div>
+              <p class="cs-text">
+                Built test automation from scratch for mobile and backend, introduced DDD and BDD system tests, stabilised
+                pipelines and led the QA function in a fast-growing product environment.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-header" style="margin-bottom: 8px; padding: 0;">
+              <h3 class="section-title" style="font-size: 14px;">About Nikos</h3>
+              <p class="section-caption">The person behind TestHubAI.</p>
+            </div>
+
+            <p class="about-text">
+              I’m <strong>Nikos Thermogiannis</strong>, a QA Automation Architect based in Greece. Over the last years I’ve helped
+              startups and scale-ups design and implement test automation across web, mobile and backend systems, with a strong
+              focus on CI/CD stability and developer experience.
+            </p>
+            <p class="about-text">
+              My background combines hands-on engineering with architecture and leadership: from designing frameworks in TypeScript
+              and Playwright, to guiding teams through domain-driven testing, to aligning QA with security and cloud practices.
+            </p>
+            <p class="about-text">
+              Certifications include GCP Professional Cloud Architect, AWS Cloud Practitioner, NIST CSF, ISC2 Certified in
+              Cybersecurity, OWASP secure coding and more — but what matters most is turning this into practical, maintainable
+              solutions for your teams.
+            </p>
+
+            <div class="about-tags">
+              <span class="about-tag">TypeScript & Node.js</span>
+              <span class="about-tag">Playwright & WebdriverIO</span>
+              <span class="about-tag">Appium (iOS & Android)</span>
+              <span class="about-tag">Kafka & event-driven flows</span>
+              <span class="about-tag">k6 performance testing</span>
+              <span class="about-tag">Docker & CI/CD</span>
+              <span class="about-tag">GCP & AWS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="section-header">
+          <h2 class="section-title">Let’s talk</h2>
+          <p class="section-caption">
+            If you’d like to explore a retainer or a focused project, the easiest way is to start with a short intro call.
+          </p>
+        </div>
+
+        <div class="contact-wrap">
+          <div>
+            <p>
+              Share a few lines about your product, tech stack and current QA/automation challenges. I’ll respond with suggested
+              next steps and whether a retainer or a project would be a better fit.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a href="mailto:info@testhubai.com" class="btn">
+              Email TestHubAI
+            </a>
+            <a href="https://www.linkedin.com/in/nikolaos-thermogiannis" class="btn secondary" target="_blank" rel="noreferrer">
+              Connect on LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> TestHubAI. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
