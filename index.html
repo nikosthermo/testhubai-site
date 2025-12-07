@@ -16,16 +16,16 @@
   />
   <style>
     :root {
-      --bg: #050816;
-      --bg-soft: #0a1020;
-      --bg-softer: #10172f;
+      --bg: #020617;
+      --bg-soft: #020617;
+      --bg-softer: #0b1120;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.1);
-      --text: #e5e7eb;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text: #f9fafb;
       --muted: #9ca3af;
-      --border: #1f2937;
+      --border: #111827;
       --danger: #f97373;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
       --radius-xl: 18px;
     }
 
@@ -37,7 +37,7 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #020617 100%);
       color: var(--text);
       line-height: 1.6;
     }
@@ -54,9 +54,9 @@
     }
 
     header {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
       margin-bottom: 40px;
     }
@@ -97,6 +97,25 @@
       color: var(--muted);
     }
 
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      font-size: 13px;
+    }
+
+    .main-nav a {
+      color: var(--muted);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .main-nav a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
     .top-cta {
       display: flex;
       gap: 10px;
@@ -111,6 +130,7 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--muted);
+      background: rgba(15, 23, 42, 0.7);
     }
 
     .btn {
@@ -288,9 +308,9 @@
     /* Sections */
     section {
       border-radius: var(--radius-xl);
-      background: rgba(10, 15, 30, 0.96);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 18px 18px 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(30, 64, 175, 0.45);
+      padding: 20px 20px 18px;
       box-shadow: var(--shadow-soft);
     }
 
@@ -307,13 +327,47 @@
     }
 
     .section-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
     }
 
     .section-caption {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      margin-bottom: 14px;
+    }
+
+    .tab {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .tab.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      margin-top: 6px;
+    }
+
+    [hidden] {
+      display: none !important;
     }
 
     /* Services */
@@ -321,12 +375,13 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
+      margin-bottom: 16px;
     }
 
     .service-card {
-      background: rgba(15, 23, 42, 0.9);
+      background: #020617;
       border-radius: 14px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       padding: 10px 10px 11px;
     }
 
@@ -336,7 +391,7 @@
     }
 
     .service-card p {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       margin-bottom: 6px;
     }
@@ -361,6 +416,7 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
+      margin-top: 12px;
     }
 
     .price-card {
@@ -417,7 +473,7 @@
     }
 
     .price-list li {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
       margin-bottom: 4px;
       padding-left: 14px;
@@ -446,12 +502,13 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
+      margin-top: 16px;
     }
 
     .step-card {
-      background: rgba(15, 23, 42, 0.9);
+      background: #020617;
       border-radius: 14px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       padding: 9px 9px 10px;
     }
 
@@ -467,7 +524,7 @@
     }
 
     .step-text {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
     }
 
@@ -476,6 +533,7 @@
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
       gap: 14px;
+      margin-top: 14px;
     }
 
     .cs-item + .cs-item {
@@ -496,12 +554,12 @@
     }
 
     .cs-text {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
     }
 
     .about-text {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       margin-bottom: 8px;
     }
@@ -528,7 +586,7 @@
       gap: 12px;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
     }
 
@@ -547,40 +605,49 @@
 
     /* Responsive */
     @media (max-width: 900px) {
+      header {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+
+      .main-nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
+
       .hero-right {
         order: -1;
       }
+
       .service-grid,
       .pricing-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
       .process-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
       .two-col {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
     @media (max-width: 640px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .top-cta {
-        justify-content: flex-start;
-      }
       .service-grid,
       .pricing-grid,
       .process-grid {
         grid-template-columns: minmax(0, 1fr);
       }
+
       section {
         padding: 16px 14px 14px;
       }
+
       .page {
         padding-inline: 14px;
       }
@@ -597,6 +664,14 @@
           <span>QA Automation Architecture Studio</span>
         </div>
       </div>
+
+      <nav class="main-nav">
+        <a href="#details" data-tab-target="services">Services</a>
+        <a href="#details" data-tab-target="packages">Packages</a>
+        <a href="#details" data-tab-target="profile">Profile</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
       <div class="top-cta">
         <span class="pill">Limited availability for 2025</span>
         <a href="#contact" class="btn secondary">Contact</a>
@@ -614,21 +689,25 @@
             QA Automation & <span>AI-Driven Testing</span> for modern engineering teams.
           </h1>
           <p class="hero-subtitle">
-            TestHubAI helps you stabilise CI/CD, scale test automation, and adopt AI-assisted testing — without hiring a full-time QA architect.
+            TestHubAI helps you stabilise CI/CD, scale test automation, and adopt AI-assisted testing —
+            without hiring a full-time QA architect.
           </p>
           <div class="hero-badges">
             <span class="hero-badge">Fractional QA Architect</span>
             <span class="hero-badge">Playwright / Appium / k6</span>
-            <span class="hero-badge">Cloud & Event-Driven Systems</span>
+            <span class="hero-badge">Cloud &amp; Event-Driven Systems</span>
           </div>
           <div class="hero-actions">
             <a href="mailto:info@testhubai.com" class="btn">
               Schedule 20-minute intro
             </a>
-            <a href="#pricing" class="btn secondary">View retainer packages</a>
+            <a href="#details" class="btn secondary" data-tab-target="packages">
+              View retainer packages
+            </a>
           </div>
           <p class="hero-note">
-            Led by <strong>Nikos Thermogiannis</strong> – Senior QA Automation Engineer at DeepSea Technologies & former Head of QA at Reydix.
+            Led by <strong>Nikos Thermogiannis</strong> – Senior QA Automation Engineer at DeepSea
+            Technologies &amp; former Head of QA at Reydix.
           </p>
         </div>
 
@@ -638,7 +717,7 @@
             <div class="metric-card">
               <div class="metric-label">Annual deployments supported</div>
               <div class="metric-value">1K+</div>
-              <div class="metric-tag">Web, mobile & backend</div>
+              <div class="metric-tag">Web, mobile &amp; backend</div>
             </div>
             <div class="metric-card">
               <div class="metric-label">Flakiness reduction</div>
@@ -647,299 +726,329 @@
             </div>
             <div class="metric-card">
               <div class="metric-label">Coverage uplift</div>
-              <div class="metric-value">2-3×</div>
+              <div class="metric-value">2–3×</div>
               <div class="metric-tag">Right tests at right level</div>
             </div>
           </div>
           <div class="stack-chips">
             <span class="stack-chip">TypeScript / Node.js</span>
-            <span class="stack-chip">Python tooling & data validation</span>
-            <span class="stack-chip">Playwright & WebdriverIO</span>
-            <span class="stack-chip">Appium (iOS & Android)</span>
+            <span class="stack-chip">Python tooling &amp; data validation</span>
+            <span class="stack-chip">Playwright &amp; WebdriverIO</span>
+            <span class="stack-chip">Appium (iOS &amp; Android)</span>
             <span class="stack-chip">k6 performance testing</span>
             <span class="stack-chip">Kafka event-driven flows</span>
             <span class="stack-chip">Docker / GitHub Actions</span>
             <span class="stack-chip">AWS / GCP</span>
           </div>
           <p class="small-note">
-            Engagements are designed as monthly retainers and focused projects — no long-term lock-in, no heavy process, just senior-level guidance where it matters most.
+            Engagements are designed as monthly retainers and focused projects — no long-term lock-in, no heavy
+            process, just senior-level guidance where it matters most.
           </p>
         </div>
       </section>
 
-      <!-- Services -->
-      <section id="services">
+      <!-- Details: Tabs -->
+      <section id="details">
         <div class="section-header">
-          <h2 class="section-title">What TestHubAI does</h2>
+          <h2 class="section-title">How TestHubAI can help</h2>
           <p class="section-caption">
-            Architecture-first QA and automation services for product teams that move fast.
+            Explore services, retainer packages, or dive into profile &amp; experience.
           </p>
         </div>
 
-        <div class="service-grid">
-          <div class="service-card">
-            <h3>QA Automation Architecture</h3>
-            <p>
-              Design or refactor your automation stack around the testing pyramid: unit, integration, system, end-to-end and non-functional.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">Testing strategy</span>
-              <span class="service-tag">Pyramid alignment</span>
-              <span class="service-tag">Scalable repos</span>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <h3>Web & Mobile E2E Frameworks</h3>
-            <p>
-              Playwright and Appium frameworks built with Domain-Driven Design, BDD and cross-platform support.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">Playwright</span>
-              <span class="service-tag">Appium</span>
-              <span class="service-tag">Cucumber / BDD</span>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <h3>CI/CD & Flakiness Stabilisation</h3>
-            <p>
-              Diagnose and stabilise failing pipelines: retries, test isolation, parallelisation, test data strategy and quality gates.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">GitHub Actions</span>
-              <span class="service-tag">Quality gates</span>
-              <span class="service-tag">Fast feedback</span>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <h3>AI-Assisted Testing</h3>
-            <p>
-              Introduce AI into your QA workflow for test generation, gap analysis, defect clustering and smarter regression selection, including Python-based harnesses where it makes sense.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">AI-driven coverage</span>
-              <span class="service-tag">LLM-assisted tests</span>
-              <span class="service-tag">Defect insights</span>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <h3>Backend & Event-Driven Testing</h3>
-            <p>
-              System and end-to-end tests for microservices, event-driven architectures, Kafka streams and complex integration flows, using TypeScript and Python-based tooling where appropriate.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">Kafka</span>
-              <span class="service-tag">Contract tests</span>
-              <span class="service-tag">System tests</span>
-            </div>
-          </div>
-
-          <div class="service-card">
-            <h3>Mentoring & Fractional QA Leadership</h3>
-            <p>
-              Hands-on coaching for QA and dev teams, levelling up automation skills and embedding quality practices into delivery.
-            </p>
-            <div class="service-tags">
-              <span class="service-tag">Team enablement</span>
-              <span class="service-tag">Workshops</span>
-              <span class="service-tag">QA leadership</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Pricing -->
-      <section id="pricing">
-        <div class="section-header">
-          <h2 class="section-title">Retainer packages</h2>
-          <p class="section-caption">
-            Fixed monthly engagements with clear scope and up to a set number of hours. No surprises.
-          </p>
+        <div class="tabs">
+          <button class="tab active" data-tab="services">Services</button>
+          <button class="tab" data-tab="packages">Packages</button>
+          <button class="tab" data-tab="profile">Profile &amp; Experience</button>
         </div>
 
-        <div class="pricing-grid">
-          <!-- Essential -->
-          <div class="price-card">
-            <div class="price-header">
-              <div class="price-name">Essential QA Guidance</div>
-              <span class="price-pill">Good for small teams</span>
-            </div>
-            <div class="price-value">Contact for Price</div>
-            <div class="price-sub">Up to 12 hours / month (≈ 2–3h / week)</div>
-            <ul class="price-list">
-              <li>Weekly 30-minute sync on QA & automation priorities</li>
-              <li>High-level guidance on Playwright / Appium</li>
-              <li>1–2 automation PR reviews per week</li>
-              <li>CI/CD pipeline review and light tuning</li>
-              <li>Slack / Teams async support (24–48h response)</li>
-              <li>Monthly QA health summary</li>
-            </ul>
-            <div class="price-footer">
-              <span>For teams with in-house QA but no architect.</span>
-            </div>
-          </div>
-
-          <!-- Architecture (recommended) -->
-          <div class="price-card recommended">
-            <div class="price-header">
-              <div class="price-name">Automation Architecture Retainer</div>
-              <span class="price-pill">Recommended</span>
-            </div>
-            <div class="price-value">Contact for Price</div>
-            <div class="price-sub">Up to 20 hours / month (≈ 3–5h / week)</div>
-            <ul class="price-list">
-              <li>Weekly deep-dive (45–60 minutes) with engineers</li>
-              <li>End-to-end oversight of test architecture across DDD, BDD and the Testing Pyramid.</li>
-              <li>Flakiness and stability improvement plan</li>
-              <li>CI/CD optimisation (parallelism, retries, test data)</li>
-              <li>Test strategy & coverage design across layers</li>
-              <li>Security/SDLC alignment based on industry practices</li>
-              <li>Priority Slack / Teams channel (12–24h response)</li>
-            </ul>
-            <div class="price-footer">
-              <span>Best fit for scale-ups and fast-moving teams.</span>
-            </div>
-          </div>
-
-          <!-- Fractional QA Architect -->
-          <div class="price-card">
-            <div class="price-header">
-              <div class="price-name">Fractional QA Architect</div>
-              <span class="price-pill">Higher touch</span>
-            </div>
-            <div class="price-value">Contact for Price</div>
-            <div class="price-sub">Up to 30 hours / month (≈ 6–8h / week)</div>
-            <ul class="price-list">
-              <li>Quarterly automation & quality roadmap</li>
-              <li>Coaching & pairing with QA and dev engineers</li>
-              <li>Advanced tooling setup (k6, Kafka, contract tests)</li>
-              <li>Release quality gating and readiness reviews</li>
-              <li>Involvement in critical incidents when needed</li>
-              <li>Custom internal workshops (by agreement)</li>
-            </ul>
-            <div class="price-footer">
-              <span>For organisations needing strong QA leadership.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Process + Case studies / About -->
-      <section>
-        <div class="section-header">
-          <h2 class="section-title">How engagements work</h2>
-          <p class="section-caption">
-            Lightweight, collaborative and designed to plug into your existing delivery process.
-          </p>
-        </div>
-
-        <div class="process-grid">
-          <div class="step-card">
-            <div class="step-label">Step 1</div>
-            <div class="step-title">Intro call</div>
-            <p class="step-text">
-              We discuss your product, stack and current QA/automation challenges to see if there is a good fit.
+        <!-- Tab 1: Services (+ Process) -->
+        <div class="tab-panel" data-tab-panel="services" id="services">
+          <div class="section-header" style="margin-bottom: 10px; padding: 0;">
+            <h3 class="section-title" style="font-size: 15px;">What TestHubAI does</h3>
+            <p class="section-caption">
+              Architecture-first QA and automation services for product teams that move fast.
             </p>
           </div>
-          <div class="step-card">
-            <div class="step-label">Step 2</div>
-            <div class="step-title">Quick assessment</div>
-            <p class="step-text">
-              Light review of your repos, pipelines and test suites to identify the top 2–3 high-impact areas.
-            </p>
-          </div>
-          <div class="step-card">
-            <div class="step-label">Step 3</div>
-            <div class="step-title">Retainer setup</div>
-            <p class="step-text">
-              We agree on the right retainer tier, communication channels and initial focus for the first 4–6 weeks.
-            </p>
-          </div>
-          <div class="step-card">
-            <div class="step-label">Step 4</div>
-            <div class="step-title">Ongoing guidance</div>
-            <p class="step-text">
-              Continuous architectural and strategic support as your teams ship features and evolve the product.
-            </p>
-          </div>
-        </div>
 
-        <div class="two-col" style="margin-top: 14px;">
-          <div>
-            <div class="section-header" style="margin-bottom: 8px; padding: 0;">
-              <h3 class="section-title" style="font-size: 14px;">Selected experience</h3>
-              <p class="section-caption">Recent work that shapes how TestHubAI operates.</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <h3>QA Automation Architecture</h3>
+              <p>
+                Design or refactor your automation stack around the testing pyramid: unit, integration,
+                system, end-to-end and non-functional.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">Testing strategy</span>
+                <span class="service-tag">Pyramid alignment</span>
+                <span class="service-tag">Scalable repos</span>
+              </div>
             </div>
 
-            <div class="cs-item">
-              <div class="cs-title">DeepSea Technologies</div>
-              <div class="cs-role">Senior QA Automation Engineer</div>
-              <p class="cs-text">
-                Supporting AI-driven maritime optimisation products with backend system tests, CI/CD integration and automation
-                frameworks around Python, Kafka, RabbitMQ and cloud-native stacks.
+            <div class="service-card">
+              <h3>Web &amp; Mobile E2E Frameworks</h3>
+              <p>
+                Playwright and Appium frameworks built with Domain-Driven Design, BDD and cross-platform support.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">Playwright</span>
+                <span class="service-tag">Appium</span>
+                <span class="service-tag">Cucumber / BDD</span>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <h3>CI/CD &amp; Flakiness Stabilisation</h3>
+              <p>
+                Diagnose and stabilise failing pipelines: retries, test isolation, parallelisation,
+                test data strategy and quality gates.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">GitHub Actions</span>
+                <span class="service-tag">Quality gates</span>
+                <span class="service-tag">Fast feedback</span>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <h3>AI-Assisted Testing</h3>
+              <p>
+                Introduce AI into your QA workflow for test generation, gap analysis, defect clustering
+                and smarter regression selection.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">AI-driven coverage</span>
+                <span class="service-tag">LLM-assisted tests</span>
+                <span class="service-tag">Defect insights</span>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <h3>Backend &amp; Event-Driven Testing</h3>
+              <p>
+                System and end-to-end tests for microservices, event-driven architectures, Kafka streams
+                and complex integration flows.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">Kafka</span>
+                <span class="service-tag">Contract tests</span>
+                <span class="service-tag">System tests</span>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <h3>Mentoring &amp; Fractional QA Leadership</h3>
+              <p>
+                Hands-on coaching for QA and dev teams, levelling up automation skills and embedding
+                quality practices into delivery.
+              </p>
+              <div class="service-tags">
+                <span class="service-tag">Team enablement</span>
+                <span class="service-tag">Workshops</span>
+                <span class="service-tag">QA leadership</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process with Services -->
+          <div style="margin-top: 18px;">
+            <div class="section-header" style="margin-bottom: 10px; padding: 0;">
+              <h3 class="section-title" style="font-size: 15px;">How engagements work</h3>
+              <p class="section-caption">
+                Lightweight, collaborative and designed to plug into your existing delivery process.
               </p>
             </div>
 
-            <div class="cs-item">
-              <div class="cs-title">Reydix</div>
-              <div class="cs-role">Head of QA / Lead Software Engineer in Test</div>
-              <p class="cs-text">
-                Built test automation from scratch for mobile and backend in TypeScript, introduced DDD and BDD system tests, stabilised
-                pipelines and led the QA function in a fast-growing product environment.
-              </p>
-            </div>
-
-            <div class="cs-item">
-              <div class="cs-title">OpenBet</div>
-              <div class="cs-role">Senior Software Engineer in Test</div>
-              <p class="cs-text">
-                Worked on Java-based Core Bet and Promotions systems, creating automated tests for core betting flows, promotion rules and settlement logic to ensure stable, high-volume releases during major sporting events.
-              </p>
-            </div>
-
-            <div class="cs-item">
-              <div class="cs-title">Light &amp; Wonder</div>
-              <div class="cs-role">Senior Software Engineer in Test</div>
-              <p class="cs-text">
-                Built Python-based automation for OPS and Engage platforms, covering backend APIs, integrations and operational workflows, while strengthening reliability and aligning QA practices with ISO 27001 security controls.
-              </p>
+            <div class="process-grid">
+              <div class="step-card">
+                <div class="step-label">Step 1</div>
+                <div class="step-title">Intro call</div>
+                <p class="step-text">
+                  We discuss your product, stack and current QA/automation challenges to see if there is a good fit.
+                </p>
+              </div>
+              <div class="step-card">
+                <div class="step-label">Step 2</div>
+                <div class="step-title">Quick assessment</div>
+                <p class="step-text">
+                  Light review of your repos, pipelines and test suites to identify the top 2–3 high-impact areas.
+                </p>
+              </div>
+              <div class="step-card">
+                <div class="step-label">Step 3</div>
+                <div class="step-title">Retainer setup</div>
+                <p class="step-text">
+                  We agree on the right retainer tier, communication channels and initial focus for the first 4–6 weeks.
+                </p>
+              </div>
+              <div class="step-card">
+                <div class="step-label">Step 4</div>
+                <div class="step-title">Ongoing guidance</div>
+                <p class="step-text">
+                  Continuous architectural and strategic support as your teams ship features and evolve the product.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div>
-            <div class="section-header" style="margin-bottom: 8px; padding: 0;">
-              <h3 class="section-title" style="font-size: 14px;">About Nikos</h3>
-              <p class="section-caption">The person behind TestHubAI.</p>
+        <!-- Tab 2: Packages / Pricing -->
+        <div class="tab-panel" data-tab-panel="packages" id="pricing" hidden>
+          <div class="section-header" style="margin-bottom: 10px; padding: 0;">
+            <h3 class="section-title" style="font-size: 15px;">Retainer packages</h3>
+            <p class="section-caption">
+              Fixed monthly engagements with clear scope and up to a set number of hours. No surprises.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <!-- Essential -->
+            <div class="price-card">
+              <div class="price-header">
+                <div class="price-name">Essential QA Guidance</div>
+                <span class="price-pill">Good for small teams</span>
+              </div>
+              <div class="price-value">Contact for Price</div>
+              <div class="price-sub">Up to 12 hours / month (≈ 2–3h / week)</div>
+              <ul class="price-list">
+                <li>Weekly 30-minute sync on QA &amp; automation priorities</li>
+                <li>High-level guidance on Playwright / Appium</li>
+                <li>1–2 automation PR reviews per week</li>
+                <li>CI/CD pipeline review and light tuning</li>
+                <li>Slack / Teams async support (24–48h response)</li>
+                <li>Monthly QA health summary</li>
+              </ul>
+              <div class="price-footer">
+                <span>For teams with in-house QA but no architect.</span>
+              </div>
             </div>
 
-            <p class="about-text">
-              I’m <strong>Nikos Thermogiannis</strong>, a QA Automation Architect based in Greece. Over the last years I’ve helped
-              startups and scale-ups design and implement test automation across web, mobile and backend systems, with a strong
-              focus on CI/CD stability and developer experience.
-            </p>
-            <p class="about-text">
-              My background combines hands-on engineering with architecture and leadership: from designing frameworks in TypeScript
-              and Playwright, to guiding teams through domain-driven testing, to aligning QA with security and cloud practices. Beyond
-              the TypeScript ecosystem, I also work extensively with Python for backend test harnesses, data validation and AI-driven testing tooling.
-            </p>
-            <p class="about-text">
-              Certifications include GCP Professional Cloud Architect, AWS Cloud Practitioner, NIST CSF, ISC2 Certified in
-              Cybersecurity, OWASP secure coding and more — but what matters most is turning this into practical, maintainable
-              solutions for your teams.
-            </p>
+            <!-- Architecture (recommended) -->
+            <div class="price-card recommended">
+              <div class="price-header">
+                <div class="price-name">Automation Architecture Retainer</div>
+                <span class="price-pill">Recommended</span>
+              </div>
+              <div class="price-value">Contact for Price</div>
+              <div class="price-sub">Up to 20 hours / month (≈ 3–5h / week)</div>
+              <ul class="price-list">
+                <li>Weekly deep-dive (45–60 minutes) with engineers</li>
+                <li>End-to-end oversight of test architecture across DDD, BDD and the Testing Pyramid.</li>
+                <li>Flakiness and stability improvement plan</li>
+                <li>CI/CD optimisation (parallelism, retries, test data)</li>
+                <li>Test strategy &amp; coverage design across layers</li>
+                <li>Security/SDLC alignment based on industry practices</li>
+                <li>Priority Slack / Teams channel (12–24h response)</li>
+              </ul>
+              <div class="price-footer">
+                <span>Best fit for scale-ups and fast-moving teams.</span>
+              </div>
+            </div>
 
-            <div class="about-tags">
-              <span class="about-tag">TypeScript & Node.js</span>
-              <span class="about-tag">Python</span>
-              <span class="about-tag">Playwright & WebdriverIO</span>
-              <span class="about-tag">Appium (iOS & Android)</span>
-              <span class="about-tag">Kafka & event-driven flows</span>
-              <span class="about-tag">k6 performance testing</span>
-              <span class="about-tag">Docker & CI/CD</span>
-              <span class="about-tag">GCP & AWS</span>
+            <!-- Fractional QA Architect -->
+            <div class="price-card">
+              <div class="price-header">
+                <div class="price-name">Fractional QA Architect</div>
+                <span class="price-pill">Higher touch</span>
+              </div>
+              <div class="price-value">Contact for Price</div>
+              <div class="price-sub">Up to 30 hours / month (≈ 6–8h / week)</div>
+              <ul class="price-list">
+                <li>Quarterly automation &amp; quality roadmap</li>
+                <li>Coaching &amp; pairing with QA and dev engineers</li>
+                <li>Advanced tooling setup (k6, Kafka, contract tests)</li>
+                <li>Release quality gating and readiness reviews</li>
+                <li>Involvement in critical incidents when needed</li>
+                <li>Custom internal workshops (by agreement)</li>
+              </ul>
+              <div class="price-footer">
+                <span>For organisations needing strong QA leadership.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Profile & Experience -->
+        <div class="tab-panel" data-tab-panel="profile" id="about" hidden>
+          <div class="two-col">
+            <div>
+              <div class="section-header" style="margin-bottom: 8px; padding: 0;">
+                <h3 class="section-title" style="font-size: 15px;">Selected experience</h3>
+                <p class="section-caption">Recent work that shapes how TestHubAI operates.</p>
+              </div>
+
+              <div class="cs-item">
+                <div class="cs-title">DeepSea Technologies</div>
+                <div class="cs-role">Senior QA Automation Engineer</div>
+                <p class="cs-text">
+                  Supporting AI-driven maritime optimisation products with backend system tests, CI/CD integration
+                  and automation frameworks around Python, Kafka, RabbitMQ and cloud-native stacks.
+                </p>
+              </div>
+
+              <div class="cs-item">
+                <div class="cs-title">Reydix</div>
+                <div class="cs-role">Head of QA / Lead Software Engineer in Test</div>
+                <p class="cs-text">
+                  Built test automation from scratch for mobile and backend in TypeScript, introduced DDD and BDD
+                  system tests, stabilised pipelines and led the QA function in a fast-growing product environment.
+                </p>
+              </div>
+
+              <div class="cs-item">
+                <div class="cs-title">OpenBet</div>
+                <div class="cs-role">Senior Software Engineer in Test</div>
+                <p class="cs-text">
+                  Worked on Java-based Core Bet and Promotions systems, creating automated tests for core betting
+                  flows, promotion rules and settlement logic to ensure stable, high-volume releases during
+                  major sporting events.
+                </p>
+              </div>
+
+              <div class="cs-item">
+                <div class="cs-title">Light &amp; Wonder</div>
+                <div class="cs-role">Senior Software Engineer in Test</div>
+                <p class="cs-text">
+                  Built Python-based automation for OPS and Engage platforms, covering backend APIs, integrations
+                  and operational workflows, while strengthening reliability and aligning QA practices with ISO 27001
+                  security controls.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-header" style="margin-bottom: 8px; padding: 0;">
+                <h3 class="section-title" style="font-size: 15px;">About Nikos</h3>
+                <p class="section-caption">The person behind TestHubAI.</p>
+              </div>
+
+              <p class="about-text">
+                I’m <strong>Nikos Thermogiannis</strong>, a QA Automation Architect based in Greece. Over the last
+                years I’ve helped startups and scale-ups design and implement test automation across web, mobile and
+                backend systems, with a strong focus on CI/CD stability and developer experience.
+              </p>
+              <p class="about-text">
+                My background combines hands-on engineering with architecture and leadership: from designing
+                frameworks in TypeScript and Playwright, to guiding teams through domain-driven testing, to aligning
+                QA with security and cloud practices. Beyond the TypeScript ecosystem, I also work extensively with
+                Python for backend test harnesses, data validation and AI-driven testing tooling.
+              </p>
+              <p class="about-text">
+                Certifications include GCP Professional Cloud Architect, AWS Cloud Practitioner, NIST CSF, ISC2
+                Certified in Cybersecurity, OWASP secure coding and more — but what matters most is turning this into
+                practical, maintainable solutions for your teams.
+              </p>
+
+              <div class="about-tags">
+                <span class="about-tag">TypeScript &amp; Node.js</span>
+                <span class="about-tag">Python</span>
+                <span class="about-tag">Playwright &amp; WebdriverIO</span>
+                <span class="about-tag">Appium (iOS &amp; Android)</span>
+                <span class="about-tag">Kafka &amp; event-driven flows</span>
+                <span class="about-tag">k6 performance testing</span>
+                <span class="about-tag">Docker &amp; CI/CD</span>
+                <span class="about-tag">GCP &amp; AWS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -957,16 +1066,29 @@
         <div class="contact-wrap">
           <div>
             <p>
-              Share a few lines about your product, tech stack and current QA/automation challenges. I’ll respond with suggested
-              next steps and whether a retainer or a project would be a better fit.
+              Share a few lines about your product, tech stack and current QA/automation challenges. I’ll respond with
+              suggested next steps and whether a retainer or a project would be a better fit.
             </p>
           </div>
           <div class="contact-actions">
             <a href="mailto:info@testhubai.com" class="btn">
               Email TestHubAI
             </a>
-            <a href="https://www.linkedin.com/in/nikolaos-thermogiannis" class="btn secondary" target="_blank" rel="noreferrer">
-              Connect on LinkedIn
+            <a
+              href="https://www.linkedin.com/company/testhubai-studio/"
+              class="btn secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Follow TestHubAI on LinkedIn
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nikolaos-thermogiannis"
+              class="btn secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Connect with Nikos
             </a>
           </div>
         </div>
@@ -979,7 +1101,42 @@
   </div>
 
   <script>
+    // Year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Tabs logic
+    const tabButtons = document.querySelectorAll(".tab");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    function setActiveTab(tabName) {
+      tabButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tabName);
+      });
+      tabPanels.forEach(panel => {
+        panel.hidden = panel.dataset.tabPanel !== tabName;
+      });
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        setActiveTab(btn.dataset.tab);
+      });
+    });
+
+    // Links that switch tabs and scroll to #details
+    document.querySelectorAll("[data-tab-target]").forEach(link => {
+      link.addEventListener("click", (e) => {
+        const targetTab = link.dataset.tabTarget;
+        if (targetTab) {
+          e.preventDefault();
+          setActiveTab(targetTab);
+          const detailsSection = document.getElementById("details");
+          if (detailsSection) {
+            detailsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
