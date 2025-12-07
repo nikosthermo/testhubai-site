@@ -40,6 +40,8 @@
       background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #020617 100%);
       color: var(--text);
       line-height: 1.6;
+      /* prevent sideways scroll on mobile */
+      overflow-x: hidden;
     }
 
     a {
@@ -638,6 +640,35 @@
     }
 
     @media (max-width: 640px) {
+      .page {
+        padding-inline: 14px;
+      }
+
+      header {
+        margin-bottom: 28px;
+        gap: 12px;
+      }
+
+      .main-nav {
+        font-size: 13px;
+        gap: 14px;
+        /* allow horizontal scroll instead of forcing page overflow */
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .top-cta {
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .top-cta .btn,
+      .top-cta .pill {
+        font-size: 12px;
+      }
+
       .service-grid,
       .pricing-grid,
       .process-grid {
@@ -646,10 +677,6 @@
 
       section {
         padding: 16px 14px 14px;
-      }
-
-      .page {
-        padding-inline: 14px;
       }
     }
   </style>
@@ -982,7 +1009,7 @@
                 <div class="cs-role">Senior QA Automation Engineer</div>
                 <p class="cs-text">
                   Supporting AI-driven maritime optimisation products with backend system tests, CI/CD integration
-                  and automation frameworks around Python, Kafka, RabbitMQ and cloud-native stacks.
+                  and automation frameworks around Python, Kafka and cloud-native stacks.
                 </p>
               </div>
 
@@ -990,8 +1017,7 @@
                 <div class="cs-title">Reydix</div>
                 <div class="cs-role">Head of QA | Lead Software Engineer in Test</div>
                 <p class="cs-text">
-                  Built test automation from scratch for mobile and backend in TypeScript, introduced DDD and BDD
-                  system tests, stabilised pipelines and led the QA function in a fast-growing product environment.
+                  Built test automation from scratch for mobile and backend in TypeScript, introduced DDD and BDD system tests, stabilised pipelines and led the QA function in a fast-growing product environment.
                 </p>
               </div>
 
