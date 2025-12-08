@@ -595,7 +595,7 @@
     .contact-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px; /* increased so the glow doesn’t blend into the next button */
     }
 
     footer {
@@ -678,6 +678,28 @@
       section {
         padding: 16px 14px 14px;
       }
+
+      /* Contact buttons: stacked + full width on small screens */
+      .contact-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .contact-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Slightly soften glow of the primary email button on mobile */
+      #contact .btn:not(.secondary) {
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+      }
     }
   </style>
 </head>
@@ -701,7 +723,6 @@
 
       <div class="top-cta">
         <span class="pill">Limited availability for 2025</span>
-        <a href="#contact" class="btn secondary">Contact</a>
         <a href="mailto:info@testhubai.com" class="btn">
           Book intro call
         </a>
