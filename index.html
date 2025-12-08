@@ -40,7 +40,6 @@
       background: radial-gradient(circle at top, #0f172a 0, #020617 50%, #020617 100%);
       color: var(--text);
       line-height: 1.6;
-      /* prevent sideways scroll on mobile */
       overflow-x: hidden;
     }
 
@@ -57,7 +56,7 @@
 
     header {
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto; /* logo | nav | CTA */
       align-items: center;
       gap: 16px;
       margin-bottom: 40px;
@@ -102,8 +101,9 @@
     .main-nav {
       display: flex;
       justify-content: center;
-      gap: 18px;
+      gap: 22px;
       font-size: 13px;
+      align-items: center;
     }
 
     .main-nav a {
@@ -120,10 +120,8 @@
 
     .top-cta {
       display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
       justify-content: flex-end;
+      align-items: center;
     }
 
     .pill {
@@ -167,6 +165,13 @@
     .btn.secondary:hover {
       border-color: var(--accent);
       background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* Slightly smaller header CTA for hierarchy */
+    .top-cta .btn {
+      padding: 7px 13px;
+      font-size: 12px;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
     }
 
     main {
@@ -595,7 +600,7 @@
     .contact-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px; /* increased so the glow doesn’t blend into the next button */
+      gap: 12px;
     }
 
     footer {
@@ -615,6 +620,10 @@
       .main-nav {
         justify-content: flex-start;
         flex-wrap: wrap;
+      }
+
+      .top-cta {
+        justify-content: flex-start;
       }
 
       .hero {
@@ -652,7 +661,6 @@
       .main-nav {
         font-size: 13px;
         gap: 14px;
-        /* allow horizontal scroll instead of forcing page overflow */
         overflow-x: auto;
         padding-bottom: 4px;
         -webkit-overflow-scrolling: touch;
@@ -661,11 +669,10 @@
       .top-cta {
         justify-content: flex-start;
         align-items: flex-start;
-        gap: 6px;
+        margin-top: 4px;
       }
 
-      .top-cta .btn,
-      .top-cta .pill {
+      .top-cta .btn {
         font-size: 12px;
       }
 
@@ -679,7 +686,6 @@
         padding: 16px 14px 14px;
       }
 
-      /* Contact buttons: stacked + full width on small screens */
       .contact-wrap {
         flex-direction: column;
         align-items: flex-start;
@@ -696,7 +702,6 @@
         justify-content: center;
       }
 
-      /* Slightly soften glow of the primary email button on mobile */
       #contact .btn:not(.secondary) {
         box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
       }
@@ -722,7 +727,6 @@
       </nav>
 
       <div class="top-cta">
-        <span class="pill">Limited availability for 2025</span>
         <a href="mailto:info@testhubai.com" class="btn">
           Book intro call
         </a>
@@ -737,8 +741,7 @@
             QA Automation & <span>AI-Driven Testing</span> for modern engineering teams.
           </h1>
           <p class="hero-subtitle">
-            TestHubAI helps you stabilise CI/CD, scale test automation, and adopt AI-assisted testing —
-            without hiring a full-time QA architect.
+            TestHubAI helps you stabilise CI/CD, scale test automation, and adopt AI-assisted testing without hiring a full-time QA architect.
           </p>
           <div class="hero-badges">
             <span class="hero-badge">Fractional QA Architect</span>
@@ -748,9 +751,6 @@
           <div class="hero-actions">
             <a href="mailto:info@testhubai.com" class="btn">
               Schedule 20-minute intro
-            </a>
-            <a href="#details" class="btn secondary" data-tab-target="packages">
-              View retainer packages
             </a>
           </div>
           <p class="hero-note">
@@ -789,7 +789,7 @@
             <span class="stack-chip">AWS / GCP</span>
           </div>
           <p class="small-note">
-            Engagements are designed as monthly retainers and focused projects — no long-term lock-in, no heavy
+            Engagements are designed as monthly retainers and focused projects. No long-term lock-in, no heavy
             process, just senior-level guidance where it matters most.
           </p>
         </div>
@@ -945,7 +945,7 @@
           <div class="section-header" style="margin-bottom: 10px; padding: 0;">
             <h3 class="section-title" style="font-size: 15px;">Retainer packages</h3>
             <p class="section-caption">
-              Fixed monthly engagements with clear scope and up to a set number of hours. No surprises.
+              Fixed monthly engagements with clear scope and up to a set number of hours. Contact for package pricing.
             </p>
           </div>
 
@@ -956,7 +956,6 @@
                 <div class="price-name">Essential QA Guidance</div>
                 <span class="price-pill">Good for small teams</span>
               </div>
-              <div class="price-value">Contact for Price</div>
               <div class="price-sub">Up to 12 hours / month (≈ 2–3h / week)</div>
               <ul class="price-list">
                 <li>Weekly 30-minute sync on QA &amp; automation priorities</li>
@@ -977,7 +976,6 @@
                 <div class="price-name">Automation Architecture Retainer</div>
                 <span class="price-pill">Recommended</span>
               </div>
-              <div class="price-value">Contact for Price</div>
               <div class="price-sub">Up to 20 hours / month (≈ 3–5h / week)</div>
               <ul class="price-list">
                 <li>Weekly deep-dive (45–60 minutes) with engineers</li>
@@ -985,7 +983,6 @@
                 <li>Flakiness and stability improvement plan</li>
                 <li>CI/CD optimisation (parallelism, retries, test data)</li>
                 <li>Test strategy &amp; coverage design across layers</li>
-                <li>Security/SDLC alignment based on industry practices</li>
                 <li>Priority Slack / Teams channel (12–24h response)</li>
               </ul>
               <div class="price-footer">
@@ -999,12 +996,11 @@
                 <div class="price-name">Fractional QA Architect</div>
                 <span class="price-pill">Higher touch</span>
               </div>
-              <div class="price-value">Contact for Price</div>
               <div class="price-sub">Up to 30 hours / month (≈ 6–8h / week)</div>
               <ul class="price-list">
                 <li>Quarterly automation &amp; quality roadmap</li>
                 <li>Coaching &amp; pairing with QA and dev engineers</li>
-                <li>Advanced tooling setup (k6, Kafka, contract tests)</li>
+                <li>Advanced tooling setup (performance &amp; security testing)</li>
                 <li>Release quality gating and readiness reviews</li>
                 <li>Involvement in critical incidents when needed</li>
                 <li>Custom internal workshops (by agreement)</li>
